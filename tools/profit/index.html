@@ -16,6 +16,7 @@
 <meta name="theme-color" content="#1d4ed8">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "利益率計算機", "url": "https://x1bv9.github.io/BizTools/tools/profit/", "description": "原価・売価から利益率や粗利を計算する無料ツール。逆算や複数商品の比較、CSV出力に対応。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "利益率計算機", "item": "https://x1bv9.github.io/BizTools/tools/profit/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "利益率と原価率の違いは？", "acceptedAnswer": {"@type": "Answer", "text": "利益率は売上に対する粗利益の割合、原価率は売上に対する原価の割合です。手数料などの経費がない場合、両者の合計は100%になります。"}}, {"@type": "Question", "name": "CSVはどんな形式ですか？", "acceptedAnswer": {"@type": "Answer", "text": "項目と値の2列のCSVで、Excel等の表計算ソフトで開けます（文字コードはUTF-8、BOM付き）。"}}]}]}</script>
 </head><body><header class="site-header"><div class="header-inner">
 <a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
 <nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 利益率計算機</nav>
@@ -66,7 +67,13 @@
 <h3>よくある質問</h3>
 <div class="faq-item"><button type="button" class="faq-q">利益率と原価率の違いは？<span>＋</span></button><div class="faq-a"><p>利益率は売上に対する粗利益の割合、原価率は売上に対する原価の割合です。手数料などの経費がない場合、両者の合計は100%になります。</p></div></div>
 <div class="faq-item"><button type="button" class="faq-q">CSVはどんな形式ですか？<span>＋</span></button><div class="faq-a"><p>項目と値の2列のCSVで、Excel等の表計算ソフトで開けます（文字コードはUTF-8、BOM付き）。</p></div></div></section>
-</section></main><footer class="site-footer"><div class="footer-inner">
+<section class="content-section"><h2>利益率と粗利率の違い</h2>
+<p>「利益率」と一口に言っても、どの利益を指すかで意味が変わります。代表的なものは次のとおりです。</p>
+<ul><li><strong>粗利率（売上総利益率）</strong>：粗利（売上高−売上原価）を売上高で割ったもの。商品そのものの収益力を表します</li><li><strong>営業利益率</strong>：営業利益（粗利から販売費・一般管理費を差し引いたもの）を売上高で割ったもの。事業全体の収益力を表します</li><li><strong>値入率</strong>：売価に対する値入額（売価−原価）の割合。粗利率と計算結果は同じになりますが、仕入れ時点の価格設定で使う考え方です</li></ul>
+<h3>計算例</h3>
+<p>原価600円の商品を1,000円で販売する場合、粗利は400円、粗利率は400÷1,000＝40%です。逆に「原価600円で粗利率40%にしたい」場合は、売価＝原価÷（1−0.40）＝1,000円と逆算できます。当ツールではこの逆算にも対応しています。</p>
+<h3>マークアップ率との混同に注意</h3>
+<p>原価に対する利益の割合（マークアップ率）は、同じ例では400÷600＝約66.7%となり、粗利率とは異なります。取引先との会話では、どちらの率を指しているか確認すると誤解を防げます。</p></section></section></main><footer class="site-footer"><div class="footer-inner">
 <div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
 <nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
 </div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/calc.js"></script><script src="../../assets/js/profit.js"></script></body></html>

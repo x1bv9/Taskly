@@ -16,6 +16,9 @@
       data = data || {};
       var tr = document.createElement('tr');
       tr.className = 'item-row';
+      var tdCode = document.createElement('td');
+      var inCode = document.createElement('input'); inCode.type = 'text'; inCode.className = 'it-code'; inCode.placeholder = '品番'; inCode.value = data.code || '';
+      tdCode.appendChild(inCode);
       var tdName = document.createElement('td');
       var inName = document.createElement('input'); inName.type = 'text'; inName.className = 'it-name'; inName.placeholder = '商品・サービス名'; inName.value = data.name || '';
       tdName.appendChild(inName);
@@ -35,8 +38,8 @@
       var del = document.createElement('button'); del.type = 'button'; del.className = 'btn btn-danger btn-small'; del.textContent = '削除';
       del.addEventListener('click', function () { tr.remove(); if (!itemsBody.querySelector('.item-row')) addItemRow(); update(); });
       tdDel.appendChild(del);
-      [tdName, tdQty, tdPrice, tdRate, tdAmt, tdDel].forEach(function (td) { tr.appendChild(td); });
-      [inName, inQty, inPrice, sel].forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
+      [tdCode, tdName, tdQty, tdPrice, tdRate, tdAmt, tdDel].forEach(function (td) { tr.appendChild(td); });
+      [inCode, inName, inQty, inPrice, sel].forEach(function (el) { el.addEventListener('input', update); el.addEventListener('change', update); });
       itemsBody.appendChild(tr);
       return tr;
     }
@@ -45,6 +48,7 @@
       var items = [];
       itemsBody.querySelectorAll('.item-row').forEach(function (tr) {
         items.push({
+          code: tr.querySelector('.it-code').value.trim(),
           name: tr.querySelector('.it-name').value.trim(),
           quantity: Number(tr.querySelector('.it-qty').value) || 0,
           unitPrice: Number(tr.querySelector('.it-price').value) || 0,
@@ -114,35 +118,59 @@
       return { data: data, result: result, errors: errs };
     }
 
+    function fmtJP(d) {
+      if (!d) return '—';
+      var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d);
+      if (!m) return d;
+      return m[1] + '年' + Number(m[2]) + '月' + Number(m[3]) + '日';
+    }
+
     function renderPreview(data, result) {
+      var isEst = cfg.prefix === 'estimate';
       setText('pv-title', cfg.kindLabel);
-      setText('pv-number', (cfg.prefix === 'estimate' ? '見積書番号: ' : '請求書番号: ') + (data.docNumber || '—'));
-      setText('pv-date', '発行日: ' + (data.docDate || '—'));
+      setText('pv-number', (isEst ? '見積書番号：' : '請求書番号：') + (data.docNumber || '—'));
+      setText('pv-date', '発行日：' + fmtJP(data.docDate));
       setText('pv-client', (data.clientName || '（取引先未入力）') + (data.clientPerson ? '　' + data.clientPerson + ' 様' : ' 御中'));
+      setText('pv-client-postal', data.clientPostal ? '〒' + data.clientPostal : '');
       setText('pv-client-address', data.clientAddress || '');
-      setText('pv-subject', data.subject ? '件名: ' + data.subject : '');
-      setText('pv-total', BizFmt.yen(result.total));
-      setText('pv-issuer', [data.issuerName, data.issuerAddress, data.issuerTel ? 'TEL: ' + data.issuerTel : '', data.issuerEmail || '', data.issuerReg ? '登録番号: ' + data.issuerReg : ''].filter(Boolean).join('\n'));
-      setText('pv-valid', cfg.prefix === 'estimate' ? ('有効期限: ' + (data.validDate || '—')) : ('支払期限: ' + (data.validDate || '—')));
+      setText('pv-greeting', isEst ? '下記の通りお見積りいたします。ご検討のほど、よろしくお願い致します。' : '下記の通りご請求申し上げます。よろしくお願い致します。');
+      setText('pv-subject', data.subject ? '件名：' + data.subject : '');
+      setText('pv-issuer-name', data.issuerName || '');
+      setText('pv-issuer', [data.issuerPostal ? '〒' + data.issuerPostal : '', data.issuerAddress || '', data.issuerTel ? 'TEL：' + data.issuerTel : '', data.issuerFax ? 'FAX：' + data.issuerFax : '', data.issuerEmail || '', data.issuerReg ? '登録番号：' + data.issuerReg : ''].filter(Boolean).join('\n'));
+      setText('pv-valid', data.validDate ? ((isEst ? '本見積書有効期限：' : 'お支払期限：') + fmtJP(data.validDate)) : '');
       var tbody = field('pv-items'); tbody.textContent = '';
+      var hasReduced = false, hasExempt = false;
       result.lines.forEach(function (ln) {
+        if (ln.taxRate === 8) hasReduced = true;
+        if (ln.taxRate === 0) hasExempt = true;
+        var marker = ln.taxRate === 8 ? ' ※' : (ln.taxRate === 0 ? ' （非課税）' : '');
         var tr = document.createElement('tr');
-        [ln.name || '—', String(ln.quantity), BizFmt.num(ln.unitPrice), ln.taxRate + '%', BizFmt.yen(ln.amount)].forEach(function (v, idx) {
-          var td = document.createElement('td'); if (idx > 0) td.className = 'num'; td.textContent = v; tr.appendChild(td);
+        [ln.code || '', (ln.name || '—') + marker, String(ln.quantity), BizFmt.num(ln.unitPrice), BizFmt.yen(ln.amount)].forEach(function (v, idx) {
+          var td = document.createElement('td'); if (idx >= 2) td.className = 'num'; td.textContent = v; tr.appendChild(td);
         });
         tbody.appendChild(tr);
       });
+      var MINROWS = 8;
+      for (var i = result.lines.length; i < MINROWS; i++) {
+        var btr = document.createElement('tr'); btr.className = 'pv-blank';
+        for (var j = 0; j < 5; j++) btr.appendChild(document.createElement('td'));
+        tbody.appendChild(btr);
+      }
+      var notes = [];
+      if (hasReduced) notes.push('※は軽減税率対象品目です。');
+      if (hasExempt) notes.push('（非課税）の品目は消費税の対象外です。');
+      setText('pv-taxnote', notes.join(' '));
       var sum = field('pv-summary'); sum.textContent = '';
       function row(k, v, cls) { var d = document.createElement('div'); d.className = 'summary-row' + (cls ? ' ' + cls : ''); var a = document.createElement('span'); a.textContent = k; var b = document.createElement('span'); b.textContent = v; d.appendChild(a); d.appendChild(b); sum.appendChild(d); }
       row('小計', BizFmt.yen(result.subtotal));
-      result.taxDetails.forEach(function (d) { row(d.rate + '%対象 ' + BizFmt.yen(d.base) + ' の消費税', BizFmt.yen(d.tax)); });
-      row('消費税合計', BizFmt.yen(result.taxTotal));
+      row('消費税', BizFmt.yen(result.taxTotal));
       row('合計', BizFmt.yen(result.total), 'total');
+      setText('pv-taxbreak', result.taxDetails.length ? '消費税内訳：' + result.taxDetails.map(function (d) { return d.rate + '%対象 ' + BizFmt.yen(d.base) + '（消費税 ' + BizFmt.yen(d.tax) + '）'; }).join('　') : '');
       setText('pv-notes', data.notes || '');
-      if (cfg.prefix === 'estimate') setText('pv-payment', data.paymentTerms ? '支払条件: ' + data.paymentTerms : '');
+      if (isEst) setText('pv-payment', data.paymentTerms ? '支払条件：' + data.paymentTerms : '');
       if (cfg.bank) {
         var bankTxt = [data.bankName, data.bankBranch, data.bankType, data.bankNumber, data.bankHolder].filter(Boolean).join(' ');
-        setText('pv-bank', bankTxt ? '振込先: ' + bankTxt : '');
+        setText('pv-bank', bankTxt ? '振込先：' + bankTxt : '');
       }
     }
 

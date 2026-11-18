@@ -16,6 +16,7 @@
 <meta name="theme-color" content="#1d4ed8">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "見積書メーカー", "url": "https://x1bv9.github.io/BizTools/tools/estimate/", "description": "無料の見積書作成ツール。税率別（10%・8%）の消費税計算に対応し、保存・印刷・PDF保存がブラウザだけでできます。登録不要。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "見積書メーカー", "item": "https://x1bv9.github.io/BizTools/tools/estimate/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。入力データはブラウザ内にのみ保存されます。"}}, {"@type": "Question", "name": "軽減税率（8%）に対応していますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。商品行ごとに10%・8%・0%から税率を選べます。"}}]}]}</script>
 </head><body><header class="site-header"><div class="header-inner">
 <a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
 <nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 見積書メーカー</nav>
@@ -25,13 +26,16 @@
 <form id="doc-form" novalidate>
 <h3>発行者情報</h3><div class="form-grid">
 <div class="field"><label>会社名または氏名 *</label><input type="text" data-field="issuerName"></div>
+<div class="field"><label>郵便番号</label><input type="text" data-field="issuerPostal" placeholder="例：153-0023"></div>
 <div class="field"><label>住所</label><input type="text" data-field="issuerAddress"></div>
 <div class="field"><label>電話番号</label><input type="tel" data-field="issuerTel"></div>
+<div class="field"><label>FAX番号</label><input type="tel" data-field="issuerFax"></div>
 <div class="field"><label>メールアドレス</label><input type="email" data-field="issuerEmail"></div>
 <div class="field"><label>登録番号（任意）</label><input type="text" data-field="issuerReg" placeholder="例：T1234567890123"></div></div>
 <h3>取引先情報</h3><div class="form-grid">
 <div class="field"><label>会社名 *</label><input type="text" data-field="clientName"></div>
 <div class="field"><label>担当者名</label><input type="text" data-field="clientPerson"></div>
+<div class="field"><label>郵便番号</label><input type="text" data-field="clientPostal" placeholder="例：150-0013"></div>
 <div class="field"><label>住所</label><input type="text" data-field="clientAddress"></div></div>
 <h3>見積書情報</h3><div class="form-grid">
 <div class="field"><label>見積書番号</label><input type="text" data-field="docNumber" placeholder="EST-001"></div>
@@ -39,7 +43,7 @@
 <div class="field"><label>有効期限</label><input type="date" data-field="validDate"></div>
 <div class="field"><label>件名</label><input type="text" data-field="subject"></div></div>
 <h3>商品・サービス</h3>
-<table class="items-table"><thead><tr><th>商品名</th><th style="width:80px">数量</th><th style="width:110px">単価（税抜）</th><th style="width:90px">税率</th><th class="num" style="width:110px">金額</th><th style="width:70px"></th></tr></thead><tbody id="items-body"></tbody></table>
+<table class="items-table"><thead><tr><th style="width:90px">品番</th><th>商品名</th><th style="width:80px">数量</th><th style="width:110px">単価（税抜）</th><th style="width:90px">税率</th><th class="num" style="width:110px">金額</th><th style="width:70px"></th></tr></thead><tbody id="items-body"></tbody></table>
 <div class="toolbar"><button type="button" class="btn btn-outline btn-small" id="add-item">＋ 行を追加</button></div>
 <div class="summary-box"><div id="sum-tax-detail"></div>
 <div class="summary-row"><span>小計（税抜）</span><span id="sum-subtotal">0円</span></div>
@@ -61,15 +65,26 @@
 <h3>保存済み見積書</h3><div id="saved-list"></div>
 <p style="font-size:13px;color:var(--muted)">入力内容は自動でブラウザに保存されます（自動保存は最新の1件のみ）。</p></div>
 </div><div><div class="print-sheet" id="print-sheet">
-<h1 id="pv-title">見積書</h1>
-<div class="doc-meta"><div id="pv-number"></div><div id="pv-date"></div><div id="pv-valid"></div></div>
-<p class="party" style="font-size:16px;font-weight:700" id="pv-client"></p>
+<h1 id="pv-title" class="doc-title">見積書</h1>
+<div class="doc-top">
+<div class="doc-left">
+<p class="doc-client" id="pv-client"></p>
+<p class="party" id="pv-client-postal"></p>
 <p class="party" id="pv-client-address"></p>
-<p id="pv-subject" style="font-weight:700"></p>
-<p>合計金額（税込）: <span class="total-big" id="pv-total">0円</span></p>
-<table><thead><tr><th>商品名</th><th class="num">数量</th><th class="num">単価</th><th class="num">税率</th><th class="num">金額</th></tr></thead><tbody id="pv-items"></tbody></table>
-<div class="summary-box" style="margin-top:14px"><div id="pv-summary"></div></div>
-<h2>発行者</h2><p class="party" id="pv-issuer"></p>
+<p class="doc-greeting" id="pv-greeting"></p>
+<p id="pv-subject" class="doc-subject"></p>
+</div>
+<div class="doc-right">
+<div class="doc-meta"><div id="pv-number"></div><div id="pv-date"></div></div>
+<div class="doc-issuer-name" id="pv-issuer-name"></div>
+<p class="party" id="pv-issuer"></p>
+</div>
+</div>
+<p class="doc-valid" id="pv-valid"></p>
+<table class="doc-table"><thead><tr><th style="width:15%">品番</th><th>品名</th><th class="num" style="width:10%">品数</th><th class="num" style="width:15%">単価</th><th class="num" style="width:18%">金額</th></tr></thead><tbody id="pv-items"></tbody></table>
+<p class="doc-taxnote" id="pv-taxnote"></p>
+<div class="doc-totals"><div id="pv-summary"></div></div>
+<p class="doc-taxbreak" id="pv-taxbreak"></p>
 <h2>備考</h2><p class="party" id="pv-notes"></p><p id="pv-payment"></p>
 </div></div></div>
 <section class="content-section"><h2>見積書メーカーについて</h2>
@@ -79,7 +94,13 @@
 <h3>利用するメリット</h3><p>表計算ソフトのテンプレートを探す手間がなく、ブラウザだけで作成できます。入力は自動保存され、名前を付けて複数の見積書を保存できます。</p>
 <h3>よくある質問</h3>
 <div class="faq-item"><button type="button" class="faq-q">データは送信されますか？<span>＋</span></button><div class="faq-a"><p>いいえ。入力データはブラウザ内にのみ保存されます。</p></div></div>
-<div class="faq-item"><button type="button" class="faq-q">軽減税率（8%）に対応していますか？<span>＋</span></button><div class="faq-a"><p>はい。商品行ごとに10%・8%・0%から税率を選べます。</p></div></div></section></section></main><footer class="site-footer"><div class="footer-inner">
+<div class="faq-item"><button type="button" class="faq-q">軽減税率（8%）に対応していますか？<span>＋</span></button><div class="faq-a"><p>はい。商品行ごとに10%・8%・0%から税率を選べます。</p></div></div></section><section class="content-section"><h2>見積書の書き方と作成のポイント</h2>
+<p>見積書は、取引条件を事前に明確にし、後のトラブルを防ぐための重要な書類です。一般的には次の項目を記載します。</p>
+<ul><li>発行日と見積書番号</li><li>宛先（会社名・担当者名）</li><li>発行者の会社名・住所・連絡先</li><li>件名（何の見積もりか）</li><li>品目・数量・単価・金額</li><li>小計・消費税・合計金額</li><li>有効期限</li><li>支払条件・納期などの備考</li></ul>
+<h3>有効期限の目安</h3>
+<p>見積書の有効期限は、一般に発行から1〜3か月程度とされることが多くあります。原材料価格が変動しやすい取引では短めに設定するのが一般的です。当ツールでは有効期限を目立つ位置に表示する形式にしています。</p>
+<h3>消費税の表示</h3>
+<p>単価は税抜で入力し、消費税は税率（10%・8%）ごとに集計して表示します。軽減税率の対象品目には「※」印が付き、脚注で明示されます。</p></section></section></main><footer class="site-footer"><div class="footer-inner">
 <div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
 <nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
 </div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/calc.js"></script><script src="../../assets/vendor/html2canvas.min.js"></script><script src="../../assets/vendor/jspdf.umd.min.js"></script><script src="../../assets/js/pdf.js"></script><script src="../../assets/js/document.js"></script><script src="../../assets/js/estimate.js"></script></body></html>

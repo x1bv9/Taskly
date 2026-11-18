@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>領収書メーカー｜無料で領収書を作成・PDF保存｜BizTools</title><meta name="description" content="無料の領収書作成ツール。金額（税込）と税率を入れるだけで税抜額と消費税額の内訳を自動計算し、収入印紙欄付きの領収書を作成できます。保存・印刷・PDF保存対応、登録不要。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/receipt/">
+<meta property="og:type" content="website"><meta property="og:title" content="領収書メーカー｜無料で領収書を作成・PDF保存｜BizTools"><meta property="og:description" content="無料の領収書作成ツール。金額（税込）と税率を入れるだけで税抜額と消費税額の内訳を自動計算し、収入印紙欄付きの領収書を作成できます。保存・印刷・PDF保存対応、登録不要。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/receipt/"><meta property="og:site_name" content="BizTools">
+<meta property="og:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+
+<!-- favicon -->
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "領収書メーカー", "url": "https://x1bv9.github.io/BizTools/tools/receipt/", "description": "無料の領収書作成ツール。税込金額から消費税の内訳を自動計算し、印刷・PDF保存がブラウザだけでできます。登録不要。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "領収書メーカー", "item": "https://x1bv9.github.io/BizTools/tools/receipt/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "収入印紙は必ず貼る必要がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "一般に、紙の領収書では領収金額によって収入印紙が必要とされる場合がありますが、対象となる文書の種類や金額、発行者の立場などによって扱いが異なります。このツールでは目安として、金額が5万円以上の場合に印紙欄を表示しています。実際の要否は、国税庁の案内や税理士などの専門家にご確認ください。"}}, {"@type": "Question", "name": "PDFで発行した領収書にも収入印紙は必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "一般に、PDFなどの電子データで発行する領収書は印紙税の課税対象にならないと説明されることが多いです。ただし、印刷して紙で渡す場合など、運用によって扱いが変わる可能性があります。心配な場合は専門家にご確認ください。このツールの印紙欄は紙で印刷する場合の目安として表示しています。"}}, {"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。入力データはブラウザ内にのみ保存されます。"}}]}]}</script>
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 領収書メーカー</nav>
+<section class="section"><h1 style="color:var(--text-dark)">領収書メーカー</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout"><div class="card editor-panel">
+<form id="receipt-form" novalidate>
+<h3>領収書情報</h3><div class="form-grid">
+<div class="field"><label>宛名 *</label><input type="text" id="rc-payee" placeholder="例：株式会社〇〇 御中"></div>
+<div class="field"><label>金額（税込）*</label><input type="number" id="rc-amount" min="0" step="1" placeholder="例：11000"></div>
+<div class="field"><label>税率</label><select id="rc-rate"><option value="10">10%</option><option value="8">8%（軽減税率）</option><option value="0">対象外</option></select></div>
+<div class="field"><label>発行日 *</label><input type="date" id="rc-date"></div>
+<div class="field"><label>領収書番号</label><input type="text" id="rc-number" placeholder="REC-001"></div>
+<div class="field"><label>但し書き</label><input type="text" id="rc-proviso" placeholder="例：商品代金として"></div></div>
+<div class="summary-box">
+<div class="summary-row"><span>税抜金額</span><span id="rc-sum-base">0円</span></div>
+<div class="summary-row"><span>消費税額</span><span id="rc-sum-tax">0円</span></div>
+<div class="summary-row total"><span>領収金額（税込）</span><span id="rc-sum-total">0円</span></div></div>
+<p style="font-size:13px;color:var(--muted)">計算方式：入力した税込金額から、消費税額＝税込金額×税率÷（100＋税率）（小数点以下切り捨て）を差し引いて税抜金額を求めます。税率「対象外」の場合は消費税額を0円として扱います。</p>
+<h3>発行者情報</h3><div class="form-grid">
+<div class="field"><label>会社名または氏名 *</label><input type="text" id="rc-issuer-name"></div>
+<div class="field"><label>郵便番号</label><input type="text" id="rc-issuer-postal" placeholder="例：153-0023"></div>
+<div class="field"><label>住所</label><input type="text" id="rc-issuer-address"></div>
+<div class="field"><label>電話番号</label><input type="tel" id="rc-issuer-tel"></div></div>
+</form>
+<div class="toolbar no-print">
+<button type="button" class="btn" id="btn-pdf">PDFダウンロード</button>
+<button type="button" class="btn btn-outline" id="btn-print">印刷</button>
+<button type="button" class="btn btn-outline" id="btn-reset">リセット</button></div>
+<p class="print-note no-print">「PDFダウンロード」でプレビュー（右側の書類）だけをA4 PDFとして直接保存できます。入力欄はPDFに含まれません。「印刷」でもプレビューだけが印刷されます。</p>
+<p style="font-size:13px;color:var(--muted)">入力内容は自動でブラウザに保存されます（自動保存のみ）。</p>
+</div><div><div class="print-sheet" id="print-sheet">
+<h1 id="pv-title" class="doc-title">領収書</h1>
+<div class="doc-top">
+<div class="doc-left">
+<div id="pv-stamp-wrap" class="hidden">
+<div style="font-size:11px;margin-bottom:3px">収入印紙</div>
+<div style="width:96px;height:120px;border:1.5px solid #4b5563"></div>
+</div>
+</div>
+<div class="doc-right">
+<div class="doc-meta"><div id="pv-date"></div><div id="pv-number"></div></div>
+</div>
+</div>
+<p class="doc-client" id="pv-payee" style="margin-top:18px"></p>
+<p style="margin:22px 0 6px"><span id="pv-amount" style="font-size:30px;font-weight:800;letter-spacing:.05em;border-bottom:3px double #111827;padding:0 12px 4px">¥—</span></p>
+<p class="party" id="pv-proviso"></p>
+<p style="margin:2px 0 0;font-size:13px">上記正に領収いたしました。</p>
+<p class="doc-taxbreak" id="pv-breakdown" style="margin-top:14px"></p>
+<div style="margin:26px 0 0 auto;width:fit-content;max-width:60%">
+<div class="doc-issuer-name" id="pv-issuer-name" style="margin-top:0"></div>
+<p class="party" id="pv-issuer"></p>
+</div>
+</div></div></div>
+<section class="content-section"><h2>領収書メーカーについて</h2>
+<p>領収書メーカーは、宛名と金額を入力するだけで領収書を作成できる無料ツールです。金額は税込で入力し、選んだ税率（10%・8%・対象外）に応じて税抜金額と消費税額の内訳を自動計算して領収書に表示します。領収金額が5万円以上の場合は、収入印紙欄の枠をプレビューに表示します。</p>
+<h3>使い方</h3><ol><li>宛名・金額（税込）・税率・発行日・但し書きを入力します。</li><li>発行者情報を入力します。</li><li>プレビューで内容を確認し、「PDFダウンロード」または「印刷」から出力します（入力欄は出力されません）。入力内容は自動でブラウザに保存されます。</li></ol>
+<h3>利用するメリット</h3><p>手書きの領収書を用意しなくても、その場で内訳入りの領収書を発行できます。税込金額から税抜額と消費税額を自動で割り出すため、内訳の計算間違いを防げます。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">収入印紙は必ず貼る必要がありますか？<span>＋</span></button><div class="faq-a"><p>一般に、紙の領収書では領収金額によって収入印紙が必要とされる場合がありますが、対象となる文書の種類や金額、発行者の立場などによって扱いが異なります。このツールでは目安として、金額が5万円以上の場合に印紙欄を表示しています。実際の要否は、国税庁の案内や税理士などの専門家にご確認ください。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">PDFで発行した領収書にも収入印紙は必要ですか？<span>＋</span></button><div class="faq-a"><p>一般に、PDFなどの電子データで発行する領収書は印紙税の課税対象にならないと説明されることが多いです。ただし、印刷して紙で渡す場合など、運用によって扱いが変わる可能性があります。心配な場合は専門家にご確認ください。このツールの印紙欄は紙で印刷する場合の目安として表示しています。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">データは送信されますか？<span>＋</span></button><div class="faq-a"><p>いいえ。入力データはブラウザ内にのみ保存されます。</p></div></div></section></section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/vendor/html2canvas.min.js"></script><script src="../../assets/vendor/jspdf.umd.min.js"></script><script src="../../assets/js/pdf.js"></script><script src="../../assets/js/receipt.js"></script></body></html>

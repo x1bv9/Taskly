@@ -52,6 +52,14 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 500);
   };
 
+  // PWA: register service worker (path resolved from this script location)
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    try {
+      var swUrl = new URL('sw.js', document.currentScript ? document.currentScript.src.replace(/assets\/js\/common\.js.*$/, '') : location.href).href;
+      navigator.serviceWorker.register(swUrl).catch(function () { /* optional feature */ });
+    } catch (e) { /* ignore */ }
+  }
+
   window.BizCsvCell = function (v) {
     var s = String(v == null ? '' : v);
     if (/[",\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';

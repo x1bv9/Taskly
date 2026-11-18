@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>源泉徴収計算機｜報酬・料金等の源泉徴収税額を計算｜BizTools</title><meta name="description" content="フリーランスや個人事業主への報酬・料金等の支払いにかかる源泉徴収税額と差引支払額を計算できる無料ツール。100万円超の計算、司法書士・土地家屋調査士等の区分にも対応。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/withholding/">
+<meta property="og:type" content="website"><meta property="og:title" content="源泉徴収計算機｜報酬・料金等の源泉徴収税額を計算｜BizTools"><meta property="og:description" content="報酬・料金等の支払いにかかる源泉徴収税額と差引支払額を計算できる無料ツール。100万円超の計算、司法書士・土地家屋調査士等の区分にも対応。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/withholding/"><meta property="og:site_name" content="BizTools">
+<meta property="og:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+
+<!-- favicon -->
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "源泉徴収計算機", "url": "https://x1bv9.github.io/BizTools/tools/withholding/", "description": "報酬・料金等の源泉徴収税額と差引支払額を計算できます。司法書士等の区分にも対応。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "源泉徴収計算機", "item": "https://x1bv9.github.io/BizTools/tools/withholding/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "支払金額が100万円を超えると税率はどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "100万円以下の部分には10.21%、100万円を超える部分には20.42%が適用されます。計算式は「（支払金額 − 1,000,000円）× 20.42% ＋ 102,100円」です（102,100円は100万円部分にかかる税額）。"}}, {"@type": "Question", "name": "消費税込み・税抜き、どちらの金額で計算しますか？", "acceptedAnswer": {"@type": "Answer", "text": "原則として、消費税込みの支払金額が源泉徴収の対象です。ただし、請求書等で報酬・料金の額と消費税額が明確に区分されている場合は、消費税抜きの金額を対象とすることができます。本ツールでは、入力された金額をそのまま対象として計算します。"}}, {"@type": "Question", "name": "司法書士への報酬の計算が違うのはなぜですか？", "acceptedAnswer": {"@type": "Answer", "text": "司法書士・土地家屋調査士等への報酬は、支払金額から10,000円を控除した残額に10.21%を適用する方式が定められているためです。支払金額が10,000円以下の場合は源泉徴収税額は0円になります。"}}]}]}</script>
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 源泉徴収計算機</nav>
+<section class="section"><h1 style="color:var(--text-dark)">源泉徴収計算機</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout">
+<div class="card"><h2>入力</h2>
+<div class="field"><label for="w-amount">支払金額（円）</label><input type="number" id="w-amount" min="0" step="1" placeholder="例：500000"></div>
+<div class="field"><label>区分</label>
+<label style="font-weight:400"><input type="radio" name="w-kind" value="general" checked> 一般の報酬・料金等</label>
+<label style="font-weight:400"><input type="radio" name="w-kind" value="judicial"> 司法書士・土地家屋調査士等</label></div>
+<h3>計算式</h3>
+<p style="font-size:14px">一般の報酬・料金等<br>・支払金額が100万円以下：支払金額 × 10.21%<br>・支払金額が100万円超：（支払金額 − 1,000,000円）× 20.42% ＋ 102,100円<br>司法書士・土地家屋調査士等<br>・（支払金額 − 10,000円）× 10.21%（支払金額が10,000円以下の場合は0円）</p>
+<p style="font-size:13px;color:var(--muted)">税額に1円未満の端数が生じる場合は切り捨てます。税率には復興特別所得税（0.21%）を含みます。</p>
+<div class="toolbar"><button type="button" class="btn btn-danger" id="btn-reset">リセット</button></div>
+</div>
+<div><div class="card"><h2>計算結果</h2><div class="result-grid">
+<div class="result-item"><div class="k">支払金額</div><div class="v" id="r-amount">0円</div></div>
+<div class="result-item"><div class="k">源泉徴収税額</div><div class="v" id="r-tax">0円</div></div>
+<div class="result-item"><div class="k">差引支払額（手取り）</div><div class="v" id="r-net">0円</div></div>
+</div>
+<h3>適用した計算式</h3>
+<p id="formula-text" style="font-size:14px">支払金額を入力すると、適用した計算式と結果が表示されます。</p>
+<p style="font-size:13px;color:var(--muted)">※ 本ツールの計算結果は目安です。正確な税務判断は税理士・税務署に確認してください。</p>
+</div></div>
+</div>
+<section class="content-section"><h2>源泉徴収について</h2>
+<p>会社や個人事業主が、フリーランスや個人に対して原稿料・デザイン料・講演料などの報酬・料金等を支払う際は、所得税等を源泉徴収して支払う義務が生じる場合があります。本ツールは「報酬・料金等」の区分について、国税庁の一般的な計算方式をもとに源泉徴収税額と差引支払額（手取り）を計算します。入力した金額はブラウザ内でのみ処理され、外部に送信されることはありません。</p>
+<h3>使い方</h3><ol><li>支払金額（原則として消費税込みの金額）を入力します。</li><li>区分（一般の報酬・料金等／司法書士・土地家屋調査士等）を選ぶと、源泉徴収税額と差引支払額が即時に表示されます。</li><li>実際に適用した計算式もあわせて表示されるので、検算にご利用ください。</li></ol>
+<h3>計算方法</h3><p>一般の報酬・料金等では、同一人に対する1回の支払金額が100万円以下の部分には10.21%、100万円を超える部分には20.42%の税率を適用します。司法書士・土地家屋調査士等への報酬は、支払金額から10,000円を差し引いた金額に10.21%を適用します（支払金額が10,000円以下の場合は源泉徴収税額は0円です）。いずれも税額の1円未満は切り捨てます。税率には復興特別所得税を含みます。</p>
+<h3>注意事項</h3><p>源泉徴収の対象になる報酬・料金等の範囲や、消費税の取り扱い（請求書で報酬額と消費税額が明確に区分されている場合は、消費税抜きの金額を対象にできる場合があります）など、実際の適用には個別の事情が影響します。本ツールの結果はあくまで目安としてご利用いただき、正確な税務判断は税理士・税務署に確認してください。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">支払金額が100万円を超えると税率はどうなりますか？<span>＋</span></button><div class="faq-a"><p>100万円以下の部分には10.21%、100万円を超える部分には20.42%が適用されます。計算式は「（支払金額 − 1,000,000円）× 20.42% ＋ 102,100円」です（102,100円は100万円部分にかかる税額）。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">消費税込み・税抜き、どちらの金額で計算しますか？<span>＋</span></button><div class="faq-a"><p>原則として、消費税込みの支払金額が源泉徴収の対象です。ただし、請求書等で報酬・料金の額と消費税額が明確に区分されている場合は、消費税抜きの金額を対象とすることができます。本ツールでは、入力された金額をそのまま対象として計算します。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">司法書士への報酬の計算が違うのはなぜですか？<span>＋</span></button><div class="faq-a"><p>司法書士・土地家屋調査士等への報酬は、支払金額から10,000円を控除した残額に10.21%を適用する方式が定められているためです。支払金額が10,000円以下の場合は源泉徴収税額は0円になります。</p></div></div></section>
+</section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/withholding.js"></script></body></html>

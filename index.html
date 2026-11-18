@@ -24,6 +24,7 @@
 <meta name="theme-color" content="#1d4ed8">
 <link rel="stylesheet" href="assets/css/style.css">
 <!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "name": "BizTools", "url": "https://x1bv9.github.io/BizTools/", "description": "見積書・請求書の作成、利益率計算、業務報告書作成をブラウザだけで行える無料Webツール集。", "inLanguage": "ja"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "本当に無料ですか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。すべてのツールを無料でご利用いただけます。"}}, {"@type": "Question", "name": "入力したデータはどこに保存されますか？", "acceptedAnswer": {"@type": "Answer", "text": "お使いのブラウザ内（LocalStorage）にのみ保存されます。外部サーバーへの送信は行いません。別の端末やブラウザでは引き継がれませんのでご注意ください。"}}, {"@type": "Question", "name": "PDFで保存するにはどうすればいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "見積書・請求書・業務報告書の各ページにある「PDFダウンロード」ボタンで、書類のプレビューだけをA4 PDFとして直接保存できます。利益率計算機は結果をCSVで出力できます。"}}, {"@type": "Question", "name": "スマートフォンでも使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。画面サイズに合わせて表示が最適化されます。"}}]}]}</script>
 </head>
 <body>
 <header class="site-header"><div class="header-inner">
@@ -71,6 +72,22 @@
 <div class="icon" aria-hidden="true">📝</div><h3>業務報告書メーカー</h3>
 <p>5種類のテンプレートから選んで入力するだけ。リアルタイムプレビューで見やすい業務報告書を作成できます。</p>
 <a class="btn" href="tools/report/index.html">利用する</a></article>
+<article class="card tool-card" data-cat="document" data-search="納品書 納品 書類 作成 pdf 受領印">
+<div class="icon" aria-hidden="true">📦</div><h3>納品書メーカー</h3>
+<p>税率別の消費税計算に対応した納品書を作成できます。受領印欄付きで、保存・印刷・PDF保存に対応。</p>
+<a class="btn" href="tools/delivery/index.html">利用する</a></article>
+<article class="card tool-card" data-cat="document" data-search="領収書 領収 書類 作成 pdf 収入印紙">
+<div class="icon" aria-hidden="true">🧾</div><h3>領収書メーカー</h3>
+<p>税込金額から消費税の内訳を自動計算する領収書を作成できます。収入印紙欄の表示に対応。</p>
+<a class="btn" href="tools/receipt/index.html">利用する</a></article>
+<article class="card tool-card" data-cat="calc" data-search="消費税 計算 税込 税抜 軽減税率">
+<div class="icon" aria-hidden="true">💴</div><h3>消費税計算機</h3>
+<p>税込・税抜の相互変換を税率（10%・8%）と端数処理を選んで計算できます。両税率の比較表示付き。</p>
+<a class="btn" href="tools/tax/index.html">利用する</a></article>
+<article class="card tool-card" data-cat="calc" data-search="源泉徴収 報酬 手取り 計算 フリーランス">
+<div class="icon" aria-hidden="true">✂️</div><h3>源泉徴収計算機</h3>
+<p>報酬・料金等の源泉徴収税額と差引支払額を計算できます。司法書士等の区分にも対応。</p>
+<a class="btn" href="tools/withholding/index.html">利用する</a></article>
 </div>
 <p id="search-no-result" class="hidden" style="text-align:center;color:var(--muted)">条件に合うツールが見つかりませんでした。</p>
 </section>
@@ -80,6 +97,8 @@
 <div class="grid grid-3">
 <div class="card"><h3>登録不要・無料</h3><p>アカウント登録なしで、開いてすぐに使えます。料金はかかりません。</p></div>
 <div class="card"><h3>データは端末内だけ</h3><p>入力内容はブラウザのLocalStorageに保存され、外部サーバーへ送信されません。</p></div>
+<div class="card"><h3>PDFは1枚にきれいに収まる</h3><p>書類のPDFは印刷とダウンロードで同じレイアウト。内容が多くても自動調整して、できるだけA4・1枚に収めます。透かしや枚数制限もありません。</p></div>
+<div class="card"><h3>伝統的な業務帳票デザイン</h3><p>見積書・請求書・納品書は、日本の業務帳票に沿ったレイアウト（有効期限の明示、品番入りの明細表）で作成できます。</p></div>
 <div class="card"><h3>スマホでも使える</h3><p>スマートフォン・タブレット・PCに対応したレスポンシブデザインです。</p></div>
 </div>
 </section>
@@ -108,7 +127,7 @@
 <div class="card"><h3>消費税計算機（予定）</h3><p>税込・税抜の相互変換を行うシンプルな計算機を検討中です。</p></div>
 <div class="card"><h3>納期・日数計算（予定）</h3><p>日付の差分や営業日計算を行うツールを検討中です。</p></div>
 </div>
-<p style="color:var(--muted);font-size:14px">※ 追加予定のツールは開発が完了してから公開します。現在利用できるのは上記4ツールです。</p>
+<p style="color:var(--muted);font-size:14px">※ 追加予定のツールは開発が完了してから公開します。現在利用できるのは上記8ツールです。</p>
 </section>
 </main>
 

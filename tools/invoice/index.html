@@ -16,6 +16,7 @@
 <meta name="theme-color" content="#1d4ed8">
 <link rel="stylesheet" href="../../assets/css/style.css">
 <!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "請求書メーカー", "url": "https://x1bv9.github.io/BizTools/tools/invoice/", "description": "無料の請求書作成ツール。適格請求書の形式に対応し、税率別の消費税計算、保存・印刷・PDF保存がブラウザだけでできます。登録不要。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "請求書メーカー", "item": "https://x1bv9.github.io/BizTools/tools/invoice/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "登録番号は必須ですか？", "acceptedAnswer": {"@type": "Answer", "text": "適格請求書を発行する場合は登録番号の記載が必要です。本ツールでは発行者情報として入力できます。"}}, {"@type": "Question", "name": "過去の請求書を確認できますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。「名前を付けて保存」した請求書は一覧から読み込み・削除できます（同一ブラウザ内）。"}}]}]}</script>
 </head><body><header class="site-header"><div class="header-inner">
 <a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
 <nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 請求書メーカー</nav>
@@ -25,13 +26,16 @@
 <form id="doc-form" novalidate>
 <h3>発行者情報</h3><div class="form-grid">
 <div class="field"><label>会社名または氏名 *</label><input type="text" data-field="issuerName"></div>
+<div class="field"><label>郵便番号</label><input type="text" data-field="issuerPostal" placeholder="例：153-0023"></div>
 <div class="field"><label>住所</label><input type="text" data-field="issuerAddress"></div>
 <div class="field"><label>電話番号</label><input type="tel" data-field="issuerTel"></div>
+<div class="field"><label>FAX番号</label><input type="tel" data-field="issuerFax"></div>
 <div class="field"><label>メールアドレス</label><input type="email" data-field="issuerEmail"></div>
 <div class="field"><label>適格請求書発行事業者登録番号</label><input type="text" data-field="issuerReg" placeholder="例：T1234567890123"></div></div>
 <h3>請求先情報</h3><div class="form-grid">
 <div class="field"><label>会社名 *</label><input type="text" data-field="clientName"></div>
 <div class="field"><label>担当者名</label><input type="text" data-field="clientPerson"></div>
+<div class="field"><label>郵便番号</label><input type="text" data-field="clientPostal" placeholder="例：150-0013"></div>
 <div class="field"><label>住所</label><input type="text" data-field="clientAddress"></div></div>
 <h3>請求書情報</h3><div class="form-grid">
 <div class="field"><label>請求書番号</label><input type="text" data-field="docNumber" placeholder="INV-001"></div>
@@ -39,7 +43,7 @@
 <div class="field"><label>支払期限</label><input type="date" data-field="validDate"></div>
 <div class="field"><label>件名</label><input type="text" data-field="subject"></div></div>
 <h3>商品・サービス</h3>
-<table class="items-table"><thead><tr><th>商品名</th><th style="width:80px">数量</th><th style="width:110px">単価（税抜）</th><th style="width:90px">税率</th><th class="num" style="width:110px">金額</th><th style="width:70px"></th></tr></thead><tbody id="items-body"></tbody></table>
+<table class="items-table"><thead><tr><th style="width:90px">品番</th><th>商品名</th><th style="width:80px">数量</th><th style="width:110px">単価（税抜）</th><th style="width:90px">税率</th><th class="num" style="width:110px">金額</th><th style="width:70px"></th></tr></thead><tbody id="items-body"></tbody></table>
 <div class="toolbar"><button type="button" class="btn btn-outline btn-small" id="add-item">＋ 行を追加</button></div>
 <div class="summary-box"><div id="sum-tax-detail"></div>
 <div class="summary-row"><span>小計（税抜）</span><span id="sum-subtotal">0円</span></div>
@@ -66,15 +70,26 @@
 <h3>保存済み請求書</h3><div id="saved-list"></div>
 <p style="font-size:13px;color:var(--muted)">入力内容は自動でブラウザに保存されます（自動保存は最新の1件のみ）。</p></div>
 </div><div><div class="print-sheet" id="print-sheet">
-<h1 id="pv-title">請求書</h1>
-<div class="doc-meta"><div id="pv-number"></div><div id="pv-date"></div><div id="pv-valid"></div></div>
-<p class="party" style="font-size:16px;font-weight:700" id="pv-client"></p>
+<h1 id="pv-title" class="doc-title">請求書</h1>
+<div class="doc-top">
+<div class="doc-left">
+<p class="doc-client" id="pv-client"></p>
+<p class="party" id="pv-client-postal"></p>
 <p class="party" id="pv-client-address"></p>
-<p id="pv-subject" style="font-weight:700"></p>
-<p>合計金額（税込）: <span class="total-big" id="pv-total">0円</span></p>
-<table><thead><tr><th>商品名</th><th class="num">数量</th><th class="num">単価</th><th class="num">税率</th><th class="num">金額</th></tr></thead><tbody id="pv-items"></tbody></table>
-<div class="summary-box" style="margin-top:14px"><div id="pv-summary"></div></div>
-<h2>発行者</h2><p class="party" id="pv-issuer"></p>
+<p class="doc-greeting" id="pv-greeting"></p>
+<p id="pv-subject" class="doc-subject"></p>
+</div>
+<div class="doc-right">
+<div class="doc-meta"><div id="pv-number"></div><div id="pv-date"></div></div>
+<div class="doc-issuer-name" id="pv-issuer-name"></div>
+<p class="party" id="pv-issuer"></p>
+</div>
+</div>
+<p class="doc-valid" id="pv-valid"></p>
+<table class="doc-table"><thead><tr><th style="width:15%">品番</th><th>品名</th><th class="num" style="width:10%">品数</th><th class="num" style="width:15%">単価</th><th class="num" style="width:18%">金額</th></tr></thead><tbody id="pv-items"></tbody></table>
+<p class="doc-taxnote" id="pv-taxnote"></p>
+<div class="doc-totals"><div id="pv-summary"></div></div>
+<p class="doc-taxbreak" id="pv-taxbreak"></p>
 <h2>備考</h2><p class="party" id="pv-notes"></p><p id="pv-bank"></p>
 </div></div></div>
 <section class="content-section"><h2>請求書メーカーについて</h2>
@@ -85,7 +100,12 @@
 <h3>利用するメリット</h3><p>税率別の対価・消費税額が自動で集計され、振込先まで一枚に記載できます。</p>
 <h3>よくある質問</h3>
 <div class="faq-item"><button type="button" class="faq-q">登録番号は必須ですか？<span>＋</span></button><div class="faq-a"><p>適格請求書を発行する場合は登録番号の記載が必要です。本ツールでは発行者情報として入力できます。</p></div></div>
-<div class="faq-item"><button type="button" class="faq-q">過去の請求書を確認できますか？<span>＋</span></button><div class="faq-a"><p>はい。「名前を付けて保存」した請求書は一覧から読み込み・削除できます（同一ブラウザ内）。</p></div></div></section></section></main><footer class="site-footer"><div class="footer-inner">
+<div class="faq-item"><button type="button" class="faq-q">過去の請求書を確認できますか？<span>＋</span></button><div class="faq-a"><p>はい。「名前を付けて保存」した請求書は一覧から読み込み・削除できます（同一ブラウザ内）。</p></div></div></section><section class="content-section"><h2>適格請求書（インボイス）の記載事項</h2>
+<p>適格請求書（インボイス）には、一般的に次の事項を記載することとされています。</p>
+<ul><li>適格請求書発行事業者の氏名または名称と登録番号</li><li>取引年月日</li><li>取引内容（軽減税率の対象品目である旨）</li><li>税率ごとに区分して合計した対価の額（税抜または税込）と適用税率</li><li>税率ごとに区分した消費税額等</li><li>書類の交付を受ける事業者の氏名または名称</li></ul>
+<p>当ツールでは、登録番号の入力欄、税率ごとの対象額と消費税額の内訳表示、軽減税率対象品目への「※」表示に対応しています。なお、実際の取引における法令要件の充足を保証するものではありません。要件の詳細は国税庁の案内や税理士等の専門家にご確認ください。</p>
+<h3>請求書作成のポイント</h3>
+<p>支払期限と振込先を明記すると、入金までのやり取りがスムーズになります。請求書番号を付けて管理すると、入金確認や再発行の際にも便利です。</p></section></section></main><footer class="site-footer"><div class="footer-inner">
 <div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
 <nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
 </div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/calc.js"></script><script src="../../assets/vendor/html2canvas.min.js"></script><script src="../../assets/vendor/jspdf.umd.min.js"></script><script src="../../assets/js/pdf.js"></script><script src="../../assets/js/document.js"></script><script src="../../assets/js/invoice.js"></script></body></html>

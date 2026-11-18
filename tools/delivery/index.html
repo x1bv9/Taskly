@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>納品書メーカー｜無料で納品書を作成・PDF保存｜BizTools</title><meta name="description" content="無料の納品書作成ツール。品番・品名・数量・単価を入力するだけで、受領印欄付きの納品書を作成でき、保存・印刷・PDF保存がブラウザだけでできます。登録不要。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/delivery/">
+<meta property="og:type" content="website"><meta property="og:title" content="納品書メーカー｜無料で納品書を作成・PDF保存｜BizTools"><meta property="og:description" content="無料の納品書作成ツール。品番・品名・数量・単価を入力するだけで、受領印欄付きの納品書を作成でき、保存・印刷・PDF保存がブラウザだけでできます。登録不要。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/delivery/"><meta property="og:site_name" content="BizTools">
+<meta property="og:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+
+<!-- favicon -->
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "納品書メーカー", "url": "https://x1bv9.github.io/BizTools/tools/delivery/", "description": "無料の納品書作成ツール。税率別の消費税計算に対応し、保存・印刷・PDF保存がブラウザだけでできます。登録不要。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "納品書メーカー", "item": "https://x1bv9.github.io/BizTools/tools/delivery/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "データは送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。入力データはブラウザ内にのみ保存されます。"}}, {"@type": "Question", "name": "受領印欄は消せますか？", "acceptedAnswer": {"@type": "Answer", "text": "受領印欄はプレビューの一部として常に表示されます。納品先に確認印をもらわない運用の場合は、空欄のままご利用ください。"}}, {"@type": "Question", "name": "納品書と請求書は別々に作る必要がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。このツールは納品書専用です。請求書は請求書メーカーで別途作成してください。入力項目（品番・品名・数量・単価）はそろえてあるため、転記しやすくなっています。"}}]}]}</script>
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 納品書メーカー</nav>
+<section class="section"><h1 style="color:var(--text-dark)">納品書メーカー</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout"><div class="card editor-panel">
+<form id="delivery-form" novalidate>
+<h3>発行者情報</h3><div class="form-grid">
+<div class="field"><label>会社名または氏名 *</label><input type="text" id="d-issuer-name"></div>
+<div class="field"><label>郵便番号</label><input type="text" id="d-issuer-postal" placeholder="例：153-0023"></div>
+<div class="field"><label>住所</label><input type="text" id="d-issuer-address"></div>
+<div class="field"><label>電話番号</label><input type="tel" id="d-issuer-tel"></div>
+<div class="field"><label>FAX番号</label><input type="tel" id="d-issuer-fax"></div></div>
+<h3>納品先情報</h3><div class="form-grid">
+<div class="field"><label>会社名 *</label><input type="text" id="d-client-name"></div>
+<div class="field"><label>担当者名</label><input type="text" id="d-client-person"></div>
+<div class="field"><label>郵便番号</label><input type="text" id="d-client-postal" placeholder="例：150-0013"></div>
+<div class="field"><label>住所</label><input type="text" id="d-client-address"></div></div>
+<h3>納品書情報</h3><div class="form-grid">
+<div class="field"><label>納品書番号</label><input type="text" id="d-doc-number" placeholder="DEL-001"></div>
+<div class="field"><label>納品日 *</label><input type="date" id="d-doc-date"></div>
+<div class="field"><label>件名</label><input type="text" id="d-subject"></div></div>
+<h3>商品・サービス</h3>
+<table class="items-table"><thead><tr><th style="width:90px">品番</th><th>品名</th><th style="width:80px">数量</th><th style="width:110px">単価（税抜）</th><th style="width:90px">税率</th><th class="num" style="width:110px">金額</th><th style="width:70px"></th></tr></thead><tbody id="items-body"></tbody></table>
+<div class="toolbar"><button type="button" class="btn btn-outline btn-small" id="add-item">＋ 行を追加</button></div>
+<div class="summary-box"><div id="sum-tax-detail"></div>
+<div class="summary-row"><span>小計（税抜）</span><span id="sum-subtotal">0円</span></div>
+<div class="summary-row"><span>消費税合計</span><span id="sum-tax">0円</span></div>
+<div class="summary-row total"><span>合計</span><span id="sum-total">0円</span></div></div>
+<p style="font-size:13px;color:var(--muted)">計算方式：単価は税抜です。税率ごとに小計を集計し、消費税＝税率別小計×税率（小数点以下切り捨て）で計算します。</p>
+
+<div class="field"><label>備考</label><textarea id="d-notes"></textarea></div>
+</form>
+<div class="toolbar no-print">
+<button type="button" class="btn" id="btn-pdf">PDFダウンロード</button>
+<button type="button" class="btn btn-outline" id="btn-print">印刷</button>
+<button type="button" class="btn btn-outline" id="btn-reset">リセット</button></div>
+<p class="print-note no-print">「PDFダウンロード」でプレビュー（右側の書類）だけをA4 PDFとして直接保存できます。入力欄はPDFに含まれません。「印刷」でもプレビューだけが印刷されます。</p>
+<div class="card no-print"><h3>名前を付けて保存</h3>
+<div class="field"><label>保存名</label><input type="text" id="save-name" placeholder="例：株式会社〇〇 11月納品分"></div>
+<button type="button" class="btn btn-outline" id="btn-save-named">保存する</button>
+<h3>保存済み納品書</h3><div id="saved-list"></div>
+<p style="font-size:13px;color:var(--muted)">入力内容は自動でブラウザに保存されます（自動保存は最新の1件のみ）。</p></div>
+</div><div><div class="print-sheet" id="print-sheet">
+<h1 id="pv-title" class="doc-title">納品書</h1>
+<div class="doc-top">
+<div class="doc-left">
+<p class="doc-client" id="pv-client"></p>
+<p class="party" id="pv-client-postal"></p>
+<p class="party" id="pv-client-address"></p>
+<p class="doc-greeting" id="pv-greeting"></p>
+<p id="pv-subject" class="doc-subject"></p>
+</div>
+<div class="doc-right">
+<div class="doc-meta"><div id="pv-number"></div><div id="pv-date"></div></div>
+<div class="doc-issuer-name" id="pv-issuer-name"></div>
+<p class="party" id="pv-issuer"></p>
+</div>
+</div>
+<table class="doc-table"><thead><tr><th style="width:15%">品番</th><th>品名</th><th class="num" style="width:10%">品数</th><th class="num" style="width:15%">単価</th><th class="num" style="width:18%">金額</th></tr></thead><tbody id="pv-items"></tbody></table>
+<p class="doc-taxnote" id="pv-taxnote"></p>
+<div class="doc-totals"><div id="pv-summary"></div></div>
+<p class="doc-taxbreak" id="pv-taxbreak"></p>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:28px;margin-top:14px">
+<div style="flex:1;min-width:0"><h2>備考</h2><p class="party" id="pv-notes"></p></div>
+<div style="flex:none;text-align:center">
+<div style="font-size:11px;margin-bottom:3px">受領印</div>
+<div style="width:104px;height:88px;border:1.5px solid #4b5563"></div>
+</div>
+</div>
+</div></div></div>
+<section class="content-section"><h2>納品書メーカーについて</h2>
+<p>納品書メーカーは、納品する商品やサービスの情報を入力するだけで、受領印欄付きの納品書を作成できる無料ツールです。見積書・請求書と同じ業務帳票レイアウトで、入力内容は右側（スマホでは下）のプレビューにリアルタイムで反映されます。</p>
+<h3>使い方</h3><ol><li>発行者情報と納品先情報を入力します。</li><li>商品行に品番・品名・数量・単価・税率を入力します（行は追加・削除できます）。</li><li>プレビューで内容を確認し、「PDFダウンロード」または「印刷」から出力します（入力欄は出力されません）。名前を付けて保存すれば、過去の納品書を後から読み込めます。</li></ol>
+<h3>計算方法</h3><p>単価は税抜価格として扱います。行金額＝数量×単価、小計は全行の合計です。消費税は税率（10%・8%・0%）ごとに小計を集計し、税率を掛けて小数点以下を切り捨てて計算します。合計＝小計＋消費税合計です。</p>
+<h3>利用するメリット</h3><p>商品の受け渡し時にそのまま渡せる納品書をブラウザだけで作成できます。プレビューの右下には受領印欄があるため、印刷して納品先の受領印をもらう用途にも使えます。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">データは送信されますか？<span>＋</span></button><div class="faq-a"><p>いいえ。入力データはブラウザ内にのみ保存されます。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">受領印欄は消せますか？<span>＋</span></button><div class="faq-a"><p>受領印欄はプレビューの一部として常に表示されます。納品先に確認印をもらわない運用の場合は、空欄のままご利用ください。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">納品書と請求書は別々に作る必要がありますか？<span>＋</span></button><div class="faq-a"><p>はい。このツールは納品書専用です。請求書は請求書メーカーで別途作成してください。入力項目（品番・品名・数量・単価）はそろえてあるため、転記しやすくなっています。</p></div></div></section></section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/calc.js"></script><script src="../../assets/vendor/html2canvas.min.js"></script><script src="../../assets/vendor/jspdf.umd.min.js"></script><script src="../../assets/js/pdf.js"></script><script src="../../assets/js/delivery.js"></script></body></html>

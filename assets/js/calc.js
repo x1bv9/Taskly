@@ -21,7 +21,7 @@
       var price = toInt(it.unitPrice);
       var rate = toInt(it.taxRate);
       var amount = Math.round(qty * price); // qty may be decimal (e.g. 1.5 hours)
-      lines.push({ name: it.name || '', quantity: qty, unitPrice: price, taxRate: rate, amount: amount });
+      lines.push({ code: it.code || '', name: it.name || '', quantity: qty, unitPrice: price, taxRate: rate, amount: amount });
       subtotal += amount;
       if (!byRate[rate]) byRate[rate] = 0;
       byRate[rate] += amount;

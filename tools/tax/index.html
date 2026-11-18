@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>消費税計算機｜税抜・税込の変換と消費税額の計算｜BizTools</title><meta name="description" content="税抜価格から税込価格、税込価格から税抜価格への変換と消費税額を計算できる無料ツール。税率10%・8%（軽減税率）の比較、端数処理（切り捨て・切り上げ・四捨五入）の選択に対応。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/tax/">
+<meta property="og:type" content="website"><meta property="og:title" content="消費税計算機｜税抜・税込の変換と消費税額の計算｜BizTools"><meta property="og:description" content="税抜価格から税込価格、税込価格から税抜価格への変換と消費税額を計算できる無料ツール。税率10%・8%（軽減税率）の比較、端数処理の選択に対応。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/tax/"><meta property="og:site_name" content="BizTools">
+<meta property="og:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+
+<!-- favicon -->
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../../site.webmanifest">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "消費税計算機", "url": "https://x1bv9.github.io/BizTools/tools/tax/", "description": "税込・税抜の相互変換を税率（10%・8%）と端数処理を選んで計算できます。両税率の比較表示付き。", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "inLanguage": "ja"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://x1bv9.github.io/BizTools/"}, {"@type": "ListItem", "position": 2, "name": "ツール一覧", "item": "https://x1bv9.github.io/BizTools/tools/"}, {"@type": "ListItem", "position": 3, "name": "消費税計算機", "item": "https://x1bv9.github.io/BizTools/tools/tax/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "税込価格から税抜価格を出すには？", "acceptedAnswer": {"@type": "Answer", "text": "変換方向で「税込価格 → 税抜価格」を選び、税込価格を入力してください。税抜価格 ＝ 税込価格 ÷（1 ＋ 税率）で計算し、割り切れない場合の端数は選択した端数処理で調整します。消費税額は税込価格から税抜価格を差し引いた金額です。"}}, {"@type": "Question", "name": "端数処理はどれを選べばいいですか？", "acceptedAnswer": {"@type": "Answer", "text": "法律で一律に決められているわけではなく、事業者が選択できます。切り捨てが一般的ですが、取引先との取り決めや自社の請求書の方式に合わせて選んでください。"}}, {"@type": "Question", "name": "軽減税率8%の対象はどんなものですか？", "acceptedAnswer": {"@type": "Answer", "text": "酒類・外食を除く飲食料品と、定期購読の新聞（週2回以上発行）が主な対象です。テイクアウトと店内飲食で税率が変わる場合もあるため、詳しくは国税庁の案内をご確認ください。"}}]}]}</script>
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html"><img class="logo-icon" src="../../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 消費税計算機</nav>
+<section class="section"><h1 style="color:var(--text-dark)">消費税計算機</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout">
+<div class="card"><h2>入力</h2>
+<div class="field"><label>変換方向</label>
+<label style="font-weight:400"><input type="radio" name="t-dir" value="toIncl" checked> 税抜価格 → 税込価格</label>
+<label style="font-weight:400"><input type="radio" name="t-dir" value="toExcl"> 税込価格 → 税抜価格</label></div>
+<div class="field"><label for="t-amount">金額（円）</label><input type="number" id="t-amount" min="0" step="1" placeholder="例：10000"></div>
+<div class="field"><label>税率</label>
+<label style="font-weight:400"><input type="radio" name="t-rate" value="10" checked> 10%（標準税率）</label>
+<label style="font-weight:400"><input type="radio" name="t-rate" value="8"> 8%（軽減税率）</label></div>
+<div class="field"><label for="t-round">端数処理</label><select id="t-round"><option value="floor" selected>切り捨て</option><option value="ceil">切り上げ</option><option value="round">四捨五入</option></select></div>
+<h3>計算式</h3>
+<p style="font-size:14px">消費税額 ＝ 税抜価格 × 税率<br>税込価格 ＝ 税抜価格 ＋ 消費税額<br>税抜価格 ＝ 税込価格 ÷（1 ＋ 税率）<br>例：税込価格 ＝ 税抜価格 × 1.10（税率10%の場合）</p>
+<p style="font-size:13px;color:var(--muted)">消費税額（税込→税抜の場合は税抜価格）に生じる1円未満の端数は、選択した端数処理で調整します。</p>
+<div class="toolbar"><button type="button" class="btn btn-danger" id="btn-reset">リセット</button></div>
+</div>
+<div><div class="card"><h2>計算結果</h2><div class="result-grid">
+<div class="result-item"><div class="k">税抜額</div><div class="v" id="r-excl">0円</div></div>
+<div class="result-item"><div class="k">消費税額</div><div class="v" id="r-tax">0円</div></div>
+<div class="result-item"><div class="k">税込額</div><div class="v" id="r-incl">0円</div></div>
+</div>
+<h3>あてはめた計算式</h3>
+<p id="formula-text" style="font-size:14px">金額を入力すると、計算式と結果が表示されます。</p>
+<h3>税率の比較（10% / 8%）</h3>
+<table><thead><tr><th>税率</th><th class="num">税抜額</th><th class="num">消費税額</th><th class="num">税込額</th></tr></thead><tbody id="compare-body"></tbody></table>
+<p style="font-size:13px;color:var(--muted)">同じ金額・変換方向・端数処理で、税率10%と8%の両方の結果を表示します。</p>
+</div></div>
+</div>
+<section class="content-section"><h2>消費税計算について</h2>
+<p>消費税計算機は、税抜価格と税込価格の変換、および消費税額の計算を行う無料ツールです。見積書・請求書の作成や、価格表示の確認などにご利用ください。入力した金額はブラウザ内でのみ処理され、外部に送信されることはありません。</p>
+<h3>使い方</h3><ol><li>変換方向（税抜→税込／税込→税抜）を選びます。</li><li>金額を入力すると、税抜額・消費税額・税込額が即時に表示されます。</li><li>税率（10%／8%）と端数処理（切り捨て／切り上げ／四捨五入）を切り替えると、結果も連動して変わります。下の比較表では、もう一方の税率での結果も同時に確認できます。</li></ol>
+<h3>軽減税率について</h3><p>2019年10月から、標準税率10%に加えて軽減税率8%が導入されています。軽減税率の主な対象は、酒類・外食を除く飲食料品の譲渡と、定期購読契約が結ばれた週2回以上発行される新聞です。対象品目の判定に迷う場合は、国税庁の案内や税理士・税務署にご確認ください。</p>
+<h3>端数処理について</h3><p>消費税額の計算で生じる1円未満の端数の処理方法は、事業者が選択できます。一般的には切り捨てが多く使われますが、請求書単位・明細単位など、どの単位で計算するかによっても結果が変わる場合があります。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">税込価格から税抜価格を出すには？<span>＋</span></button><div class="faq-a"><p>変換方向で「税込価格 → 税抜価格」を選び、税込価格を入力してください。税抜価格 ＝ 税込価格 ÷（1 ＋ 税率）で計算し、割り切れない場合の端数は選択した端数処理で調整します。消費税額は税込価格から税抜価格を差し引いた金額です。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">端数処理はどれを選べばいいですか？<span>＋</span></button><div class="faq-a"><p>法律で一律に決められているわけではなく、事業者が選択できます。切り捨てが一般的ですが、取引先との取り決めや自社の請求書の方式に合わせて選んでください。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">軽減税率8%の対象はどんなものですか？<span>＋</span></button><div class="faq-a"><p>酒類・外食を除く飲食料品と、定期購読の新聞（週2回以上発行）が主な対象です。テイクアウトと店内飲食で税率が変わる場合もあるため、詳しくは国税庁の案内をご確認ください。</p></div></div></section>
+</section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/tax.js"></script></body></html>
