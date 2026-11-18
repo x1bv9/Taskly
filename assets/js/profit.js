@@ -1,7 +1,7 @@
 (function () {
   'use strict';
-  var draftKey = 'biztools_profit_draft';
-  var compareKey = 'biztools_profit_compare';
+  var draftKey = 'taskly_profit_draft';
+  var compareKey = 'taskly_profit_compare';
   function $(id) { return document.getElementById(id); }
   function num(id) { return Number($(id).value) || 0; }
 

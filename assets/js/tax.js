@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var draftKey = 'biztools_tax_draft';
+  var draftKey = 'taskly_tax_draft';
   function $(id) { return document.getElementById(id); }
   function radioVal(name) {
     var el = document.querySelector('input[name="' + name + '"]:checked');

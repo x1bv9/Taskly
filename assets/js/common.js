@@ -1,4 +1,4 @@
-/* BizTools common helpers */
+/* Taskly common helpers */
 (function () {
   'use strict';
   // Footer year

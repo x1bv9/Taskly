@@ -1,4 +1,4 @@
-# BizTools
+# Taskly
 
 「面倒な事務作業を、ブラウザだけで簡単に。」をコンセプトにした、個人事業主・中小企業・フリーランス向けの無料Webツール集です。GitHub Pagesで公開できる完全静的なサイトで、すべての機能がブラウザ内で動作します。
 
@@ -25,7 +25,7 @@
 ## ファイル構成
 
 ```
-BizTools/
+Taskly/
 ├── index.html              トップページ
 ├── 404.html                404ページ
 ├── robots.txt
@@ -51,34 +51,34 @@ BizTools/
 └── terms/index.html        利用規約
 ```
 
-すべての内部リンクは相対パスで記述しており、サブディレクトリ公開（`https://x1bv9.github.io/BizTools/`）でも動作します。
+すべての内部リンクは相対パスで記述しており、サブディレクトリ公開（`https://x1bv9.github.io/Taskly/`）でも動作します。
 
 ## ローカルでの確認方法
 
 ```bash
-cd BizTools
+cd Taskly
 python3 -m http.server 8000
 # ブラウザで http://localhost:8000/ を開く
 ```
 
 ## GitHub Pages 公開手順
 
-1. GitHubで新しいリポジトリを作成します（例：リポジトリ名 `BizTools`）。
+1. GitHubで新しいリポジトリを作成します（例：リポジトリ名 `Taskly`）。
 2. このフォルダの中身をリポジトリにpushします。
    ```bash
    git init
    git add .
-   git commit -m "BizTools initial release"
+   git commit -m "Taskly initial release"
    git branch -M main
-   git remote add origin https://github.com/x1bv9/BizTools.git
+   git remote add origin https://github.com/x1bv9/Taskly.git
    git push -u origin main
    ```
 3. リポジトリの **Settings > Pages** を開き、Build and deployment の Source で **Deploy from a branch**、Branch で **main / (root)** を選んで保存します。
-4. 数分後に `https://x1bv9.github.io/BizTools/` で公開されます。
+4. 数分後に `https://x1bv9.github.io/Taskly/` で公開されます。
 
 ## 公開URLについて
 
-canonical・OGP・sitemap・robots は公開先の実際の URL `https://x1bv9.github.io/BizTools/` に設定済みです。URLの置換は不要です。
+canonical・OGP・sitemap・robots は公開先の実際の URL `https://x1bv9.github.io/Taskly/` に設定済みです。URLの置換は不要です。
 
 なお、お問い合わせページの宛先 `example@example.com`（`contact/index.html` 内）は未定のままです。実際の運営用メールアドレスが決まったら置き換えてください。置き換えるまでは、お問い合わせフォームはダミー宛先のメールアプリを開く動作になります。
 

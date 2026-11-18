@@ -3,8 +3,8 @@
   'use strict';
   window.BizDocumentTool = function (cfg) {
     // cfg: {prefix, kindLabel, extraFields:[ids], bank:bool}
-    var draftKey = 'biztools_' + cfg.prefix + '_draft';
-    var savedKey = 'biztools_' + cfg.prefix + '_saved';
+    var draftKey = 'taskly_' + cfg.prefix + '_draft';
+    var savedKey = 'taskly_' + cfg.prefix + '_saved';
     var form = document.getElementById('doc-form');
     var itemsBody = document.getElementById('items-body');
     var errorBox = document.getElementById('error-box');

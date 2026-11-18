@@ -1,5 +1,5 @@
-/* BizTools Service Worker: offline support with versioned cache */
-var CACHE = 'biztools-v3';
+/* Taskly Service Worker: offline support with versioned cache */
+var CACHE = 'taskly-v3';
 var CORE = [
   './',
   './index.html',

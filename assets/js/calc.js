@@ -1,4 +1,4 @@
-/* BizTools calculation core - pure functions, testable in Node.
+/* Taskly calculation core - pure functions, testable in Node.
    Tax method (estimate & invoice):
    - Unit prices are TAX-EXCLUDED (税抜).
    - Line amount = quantity * unitPrice (integer yen, inputs are integers).

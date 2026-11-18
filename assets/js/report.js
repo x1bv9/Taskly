@@ -1,7 +1,7 @@
 (function () {
   'use strict';
-  var draftKey = 'biztools_report_draft';
-  var savedKey = 'biztools_report_saved';
+  var draftKey = 'taskly_report_draft';
+  var savedKey = 'taskly_report_saved';
   var TEMPLATES = {
     general: { label: '一般業務報告書', title: '業務報告書', headings: { work: '業務内容', result: '作業実績', issue: '問題点', improve: '改善案', next: '次回の予定' }, samples: { work: '本日の主な業務内容を記入してください。', result: '完了した作業と成果を記入してください。', issue: '特になし', improve: '業務効率化の案があれば記入してください。', next: '明日の予定を記入してください。' } },
     sales: { label: '営業報告書', title: '営業報告書', headings: { work: '訪問・商談内容', result: '営業実績', issue: '課題・懸念点', improve: '改善策', next: '次回の訪問・予定' }, samples: { work: '訪問先と商談内容を記入してください。', result: '受注・見積提出などの実績を記入してください。', issue: '顧客からの要望や競合情報など', improve: 'フォロー方法の改善案など', next: '次回訪問日と目的' } },

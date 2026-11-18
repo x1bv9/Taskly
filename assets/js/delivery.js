@@ -1,8 +1,8 @@
 /* Delivery note tool (self-contained; item rows follow the document.js pattern) */
 (function () {
   'use strict';
-  var draftKey = 'biztools_delivery_draft';
-  var savedKey = 'biztools_delivery_saved';
+  var draftKey = 'taskly_delivery_draft';
+  var savedKey = 'taskly_delivery_saved';
   var itemsBody = document.getElementById('items-body');
   var errorBox = document.getElementById('error-box');
   var touched = false;

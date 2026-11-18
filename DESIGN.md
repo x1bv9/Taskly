@@ -1,7 +1,7 @@
-# BizTools — 設計書 (STEP 1)
+# Taskly — 設計書 (STEP 1)
 
 ## 概要
-- サービス名: BizTools — 「面倒な事務作業を、ブラウザだけで簡単に。」
+- サービス名: Taskly — 「面倒な事務作業を、ブラウザだけで簡単に。」
 - 対象: 個人事業主 / 中小企業 / 飲食店 / 小規模店舗 / フリーランス / 副業
 - 公開環境: GitHub Pages (静的ホスティングのみ)
 - 技術: HTML5 / CSS3 / Vanilla JS / LocalStorage / CDN任意 (現状 CDN 不使用)
@@ -10,7 +10,7 @@
 
 ## ファイル構成
 ```
-BizTools/
+Taskly/
   index.html                 トップページ
   about/index.html           サービスについて
   contact/index.html         お問い合わせ (mailto生成・バックエンドなし)
@@ -60,7 +60,7 @@ BizTools/
 
 ## SEO
 - 各ページ固有の title / meta description / OGP / パンくず / 見出し構造 / sitemap.xml / robots.txt
-- canonical / OGP / sitemap / robots は公開先の実際の URL `https://x1bv9.github.io/BizTools/...` に設定済み。置換不要。
+- canonical / OGP / sitemap / robots は公開先の実際の URL `https://x1bv9.github.io/Taskly/...` に設定済み。置換不要。
 
 ## 開発ステップと現状
 - STEP 1 設計・ファイル構成: 完了 (このファイル)

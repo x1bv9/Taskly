@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>お問い合わせ｜BizTools</title>
-<meta name="description" content="BizToolsへのお問い合わせページ。ご質問・ご要望はメールで受け付けています。">
-<link rel="canonical" href="https://x1bv9.github.io/BizTools/contact/">
+<title>お問い合わせ｜Taskly</title>
+<meta name="description" content="Tasklyへのお問い合わせページ。ご質問・ご要望はメールで受け付けています。">
+<link rel="canonical" href="https://x1bv9.github.io/Taskly/contact/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="お問い合わせ｜BizTools">
-<meta property="og:description" content="BizToolsへのお問い合わせページ。ご質問・ご要望はメールで受け付けています。">
-<meta property="og:url" content="https://x1bv9.github.io/BizTools/contact/">
-<meta property="og:site_name" content="BizTools">
-<meta property="og:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+<meta property="og:title" content="お問い合わせ｜Taskly">
+<meta property="og:description" content="Tasklyへのお問い合わせページ。ご質問・ご要望はメールで受け付けています。">
+<meta property="og:url" content="https://x1bv9.github.io/Taskly/contact/">
+<meta property="og:site_name" content="Taskly">
+<meta property="og:image" content="https://x1bv9.github.io/Taskly/assets/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://x1bv9.github.io/BizTools/assets/img/og-image.png">
+<meta name="twitter:image" content="https://x1bv9.github.io/Taskly/assets/img/og-image.png">
 
 <!-- favicon -->
 <link rel="icon" href="../favicon.ico" sizes="48x48">
@@ -27,7 +27,7 @@
 </head>
 <body>
 <header class="site-header"><div class="header-inner">
-<a class="logo" href="../index.html"><img class="logo-icon" src="../assets/img/favicon-192.png" alt="BizTools ロゴ" width="28" height="28">Biz<span>Tools</span></a>
+<a class="logo" href="../index.html"><img class="logo-icon" src="../assets/img/favicon-192.png" alt="Taskly ロゴ" width="28" height="28">Biz<span>Tools</span></a>
 <nav class="main-nav">
 <a href="../index.html">ホーム</a><a href="../tools/index.html">ツール一覧</a><a href="../about/index.html">サービスについて</a><a href="../contact/index.html">お問い合わせ</a>
 </nav></div></header><main class="container"><nav class="breadcrumb"><a href="../index.html">ホーム</a> ＞ お問い合わせ</nav>
@@ -41,9 +41,9 @@
 <div class="field"><label for="c-body">お問い合わせ内容</label><textarea id="c-body" required></textarea></div>
 <button type="submit" class="btn">メールアプリで送信する</button>
 </form></div></section></main><footer class="site-footer"><div class="footer-inner">
-<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<div><strong style="color:#fff">Taskly</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
 <nav><a href="../privacy/index.html">プライバシーポリシー</a>　<a href="../terms/index.html">利用規約</a>　<a href="../contact/index.html">お問い合わせ</a>　<a href="../about/index.html">サービスについて</a></nav>
-</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer>
+</div><div class="copyright">© <span data-year>2026</span> Taskly</div></footer>
 <div class="toast" role="status"></div><script src="../assets/js/common.js"></script>
 <script>
 document.getElementById('contact-form').addEventListener('submit', function (e) {
@@ -52,7 +52,7 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
       subject=document.getElementById('c-subject').value.trim(), body=document.getElementById('c-body').value.trim();
   if(!name||!email||!subject||!body){ BizToast('すべての項目を入力してください'); return; }
   var text = body + '\n\n---\nお名前: ' + name + '\n返信先: ' + email;
-  window.location.href = 'mailto:example@example.com?subject=' + encodeURIComponent('[BizTools] ' + subject) + '&body=' + encodeURIComponent(text);
+  window.location.href = 'mailto:example@example.com?subject=' + encodeURIComponent('[Taskly] ' + subject) + '&body=' + encodeURIComponent(text);
   BizToast('メールアプリを開きました');
 });
 </script></body></html>

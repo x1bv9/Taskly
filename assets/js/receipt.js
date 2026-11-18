@@ -1,7 +1,7 @@
 /* Receipt tool (auto-save only; tax-included amount with breakdown) */
 (function () {
   'use strict';
-  var draftKey = 'biztools_receipt_draft';
+  var draftKey = 'taskly_receipt_draft';
   var errorBox = document.getElementById('error-box');
   var touched = false;
 

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 
-Sitemap: https://x1bv9.github.io/BizTools/sitemap.xml
+Sitemap: https://x1bv9.github.io/Taskly/sitemap.xml
