@@ -93,3 +93,15 @@ PDF機能は書類系ツール（見積書・請求書・業務報告書）の�
 - 入力データは利用者のブラウザ（LocalStorage）にのみ保存され、外部送信されません。別の端末・ブラウザでは引き継がれません。
 - 本ツールが作成する請求書等が法令上の要件を満たすことを保証するものではありません。重要な書類は専門家にご確認ください。
 - AdSense等の広告コードは各HTMLの `<head>` 内コメント位置に挿入してください。未設定の場合は広告スペース自体を表示しない構造になっています。
+
+## アイコン / OGP
+
+- `favicon.ico`（ルート）: 16/32/48px マルチアイコン
+- `assets/img/favicon.svg`: ベクター形式ファビコン
+- `assets/img/favicon-192.png` / `favicon-512.png`: PWA・Android用
+- `assets/img/apple-touch-icon.png`: iOSホーム画面用（180x180）
+- `assets/img/icon-maskable-512.png`: マスカブルアイコン
+- `assets/img/og-image.png`: OGP / Twitterカード用（1200x630）
+- `site.webmanifest`: PWAマニフェスト（アイコンとテーマカラー #1d4ed8 を定義）
+
+全ページの `<head>` に相対パスでファビコンリンクを挿入済みです。ヘッダーのロゴにもアイコン画像を使用しています。
