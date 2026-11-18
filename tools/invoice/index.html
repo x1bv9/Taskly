@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>請求書メーカー｜適格請求書対応の無料作成ツール｜BizTools</title><meta name="description" content="無料の請求書作成ツール。登録番号、税率ごとの対価と消費税額、振込先を記載でき、保存・印刷・PDF保存に対応。登録不要。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/invoice/">
+<meta property="og:type" content="website"><meta property="og:title" content="請求書メーカー｜適格請求書対応の無料作成ツール｜BizTools"><meta property="og:description" content="無料の請求書作成ツール。登録番号、税率ごとの対価と消費税額、振込先を記載でき、保存・印刷・PDF保存に対応。登録不要。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/invoice/"><meta property="og:site_name" content="BizTools">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 請求書メーカー</nav>
+<section class="section"><h1 style="color:var(--text-dark)">請求書メーカー</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout"><div class="card editor-panel">
+<form id="doc-form" novalidate>
+<h3>発行者情報</h3><div class="form-grid">
+<div class="field"><label>会社名または氏名 *</label><input type="text" data-field="issuerName"></div>
+<div class="field"><label>住所</label><input type="text" data-field="issuerAddress"></div>
+<div class="field"><label>電話番号</label><input type="tel" data-field="issuerTel"></div>
+<div class="field"><label>メールアドレス</label><input type="email" data-field="issuerEmail"></div>
+<div class="field"><label>適格請求書発行事業者登録番号</label><input type="text" data-field="issuerReg" placeholder="例：T1234567890123"></div></div>
+<h3>請求先情報</h3><div class="form-grid">
+<div class="field"><label>会社名 *</label><input type="text" data-field="clientName"></div>
+<div class="field"><label>担当者名</label><input type="text" data-field="clientPerson"></div>
+<div class="field"><label>住所</label><input type="text" data-field="clientAddress"></div></div>
+<h3>請求書情報</h3><div class="form-grid">
+<div class="field"><label>請求書番号</label><input type="text" data-field="docNumber" placeholder="INV-001"></div>
+<div class="field"><label>発行日 *</label><input type="date" id="doc-date" data-field="docDate"></div>
+<div class="field"><label>支払期限</label><input type="date" data-field="validDate"></div>
+<div class="field"><label>件名</label><input type="text" data-field="subject"></div></div>
+<h3>商品・サービス</h3>
+<table class="items-table"><thead><tr><th>商品名</th><th style="width:80px">数量</th><th style="width:110px">単価（税抜）</th><th style="width:90px">税率</th><th class="num" style="width:110px">金額</th><th style="width:70px"></th></tr></thead><tbody id="items-body"></tbody></table>
+<div class="toolbar"><button type="button" class="btn btn-outline btn-small" id="add-item">＋ 行を追加</button></div>
+<div class="summary-box"><div id="sum-tax-detail"></div>
+<div class="summary-row"><span>小計（税抜）</span><span id="sum-subtotal">0円</span></div>
+<div class="summary-row"><span>消費税合計</span><span id="sum-tax">0円</span></div>
+<div class="summary-row total"><span>合計</span><span id="sum-total">0円</span></div></div>
+<p style="font-size:13px;color:var(--muted)">計算方式：単価は税抜です。税率ごとに小計を集計し、消費税＝税率別小計×税率（小数点以下切り捨て）で計算します。</p>
+<h3>振込先情報</h3><div class="form-grid">
+<div class="field"><label>銀行名</label><input type="text" data-field="bankName"></div>
+<div class="field"><label>支店名</label><input type="text" data-field="bankBranch"></div>
+<div class="field"><label>口座種別</label><select data-field="bankType"><option value="">選択してください</option><option>普通</option><option>当座</option></select></div>
+<div class="field"><label>口座番号</label><input type="text" data-field="bankNumber" inputmode="numeric"></div>
+<div class="field"><label>口座名義</label><input type="text" data-field="bankHolder"></div></div>
+<div class="field"><label>備考</label><textarea data-field="notes"></textarea></div>
+
+</form>
+<div class="toolbar no-print">
+<button type="button" class="btn" id="btn-pdf">PDFダウンロード</button>
+<button type="button" class="btn btn-outline" id="btn-print">印刷</button>
+<button type="button" class="btn btn-outline" id="btn-reset">リセット</button></div>
+<p class="print-note no-print">「PDFダウンロード」でプレビュー（右側の書類）だけをA4 PDFとして直接保存できます。入力欄はPDFに含まれません。「印刷」でもプレビューだけが印刷されます。</p>
+<div class="card no-print"><h3>名前を付けて保存</h3>
+<div class="field"><label>保存名</label><input type="text" id="save-name" placeholder="例：株式会社〇〇 11月分"></div>
+<button type="button" class="btn btn-outline" id="btn-save-named">保存する</button>
+<h3>保存済み請求書</h3><div id="saved-list"></div>
+<p style="font-size:13px;color:var(--muted)">入力内容は自動でブラウザに保存されます（自動保存は最新の1件のみ）。</p></div>
+</div><div><div class="print-sheet" id="print-sheet">
+<h1 id="pv-title">請求書</h1>
+<div class="doc-meta"><div id="pv-number"></div><div id="pv-date"></div><div id="pv-valid"></div></div>
+<p class="party" style="font-size:16px;font-weight:700" id="pv-client"></p>
+<p class="party" id="pv-client-address"></p>
+<p id="pv-subject" style="font-weight:700"></p>
+<p>合計金額（税込）: <span class="total-big" id="pv-total">0円</span></p>
+<table><thead><tr><th>商品名</th><th class="num">数量</th><th class="num">単価</th><th class="num">税率</th><th class="num">金額</th></tr></thead><tbody id="pv-items"></tbody></table>
+<div class="summary-box" style="margin-top:14px"><div id="pv-summary"></div></div>
+<h2>発行者</h2><p class="party" id="pv-issuer"></p>
+<h2>備考</h2><p class="party" id="pv-notes"></p><p id="pv-bank"></p>
+</div></div></div>
+<section class="content-section"><h2>請求書メーカーについて</h2>
+<p>請求書メーカーは、適格請求書（インボイス）の記載事項として求められる項目――発行者の登録番号、税率ごとの対価の額、消費税額など――を入力・表示できる構造の請求書作成ツールです。</p>
+<p style="font-size:14px;color:var(--muted)">※ 本ツールは記載項目を入力できる様式を提供するもので、作成した請求書が法令上の要件を満たすことを保証するものではありません。必要に応じて税理士等の専門家にご確認ください。</p>
+<h3>使い方</h3><ol><li>発行者情報（登録番号を含む）と請求先情報を入力します。</li><li>商品行と振込先を入力します。</li><li>プレビューで税率別の金額を確認し、印刷またはPDF保存します。過去の請求書は「名前を付けて保存」から管理できます。</li></ol>
+<h3>計算方法</h3><p>単価は税抜価格です。税率ごとに小計を集計し、消費税＝税率別小計×税率（小数点以下切り捨て）で計算します。請求金額＝小計＋消費税合計です。</p>
+<h3>利用するメリット</h3><p>税率別の対価・消費税額が自動で集計され、振込先まで一枚に記載できます。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">登録番号は必須ですか？<span>＋</span></button><div class="faq-a"><p>適格請求書を発行する場合は登録番号の記載が必要です。本ツールでは発行者情報として入力できます。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">過去の請求書を確認できますか？<span>＋</span></button><div class="faq-a"><p>はい。「名前を付けて保存」した請求書は一覧から読み込み・削除できます（同一ブラウザ内）。</p></div></div></section></section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/calc.js"></script><script src="../../assets/vendor/html2canvas.min.js"></script><script src="../../assets/vendor/jspdf.umd.min.js"></script><script src="../../assets/js/pdf.js"></script><script src="../../assets/js/document.js"></script><script src="../../assets/js/invoice.js"></script></body></html>

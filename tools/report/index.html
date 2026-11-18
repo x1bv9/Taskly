@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>業務報告書メーカー｜テンプレートで簡単作成・PDF保存｜BizTools</title><meta name="description" content="業務報告書をテンプレートから簡単に作成できる無料ツール。一般・営業・飲食店営業・作業完了・日報の5種類に対応し、リアルタイムプレビューと保存機能付き。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/report/">
+<meta property="og:type" content="website"><meta property="og:title" content="業務報告書メーカー｜テンプレートで簡単作成・PDF保存｜BizTools"><meta property="og:description" content="業務報告書をテンプレートから簡単に作成できる無料ツール。一般・営業・飲食店営業・作業完了・日報の5種類に対応し、リアルタイムプレビューと保存機能付き。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/report/"><meta property="og:site_name" content="BizTools">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 業務報告書メーカー</nav>
+<section class="section"><h1 style="color:var(--text-dark)">業務報告書メーカー</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout"><div class="card editor-panel">
+<div class="field"><label for="template-select">テンプレート</label>
+<select id="template-select"><option value="general">一般業務報告書</option><option value="sales">営業報告書</option><option value="restaurant">飲食店営業報告書</option><option value="completion">作業完了報告書</option><option value="daily">日報</option></select></div>
+<div class="form-grid">
+<div class="field"><label for="r-title">報告書タイトル</label><input type="text" id="r-title"></div>
+<div class="field"><label for="r-date">報告日</label><input type="date" id="r-date"></div>
+<div class="field"><label for="r-reporter">報告者名 *</label><input type="text" id="r-reporter"></div>
+<div class="field"><label for="r-dept">所属部署</label><input type="text" id="r-dept"></div></div>
+<div class="field"><label for="r-work">業務内容</label><textarea id="r-work"></textarea></div>
+<div class="field"><label for="r-result">作業実績</label><textarea id="r-result"></textarea></div>
+<div class="field"><label for="r-issue">問題点</label><textarea id="r-issue"></textarea></div>
+<div class="field"><label for="r-improve">改善案</label><textarea id="r-improve"></textarea></div>
+<div class="field"><label for="r-next">次回の予定</label><textarea id="r-next"></textarea></div>
+<div class="field"><label for="r-notes">備考</label><textarea id="r-notes"></textarea></div>
+<div class="toolbar"><button type="button" class="btn" id="btn-pdf">PDFダウンロード</button><button type="button" class="btn btn-outline" id="btn-print">印刷</button><button type="button" class="btn btn-danger" id="btn-reset">リセット</button></div>
+<p class="print-note">「PDFダウンロード」でプレビュー（右側の書類）だけをA4 PDFとして直接保存できます。入力欄はPDFに含まれません。「印刷」でもプレビューだけが印刷されます。</p>
+<h3>名前を付けて保存</h3>
+<div class="field"><label for="save-name">保存名</label><input type="text" id="save-name" placeholder="例：11月18日 日報"></div>
+<button type="button" class="btn btn-outline" id="btn-save-named">保存する</button>
+<h3>過去の報告書</h3><div id="saved-list"></div>
+</div>
+<div><div class="print-sheet" id="print-sheet"><h1 id="pv-title">業務報告書</h1>
+<p class="doc-meta" id="pv-meta"></p>
+<h2 id="pv-h-work">業務内容</h2><p class="party" id="pv-work"></p>
+<h2 id="pv-h-result">作業実績</h2><p class="party" id="pv-result"></p>
+<h2 id="pv-h-issue">問題点</h2><p class="party" id="pv-issue"></p>
+<h2 id="pv-h-improve">改善案</h2><p class="party" id="pv-improve"></p>
+<h2 id="pv-h-next">次回の予定</h2><p class="party" id="pv-next"></p>
+<div id="pv-notes-wrap"><h2>備考</h2><p class="party" id="pv-notes"></p></div>
+</div></div></div>
+<section class="content-section"><h2>業務報告書メーカーについて</h2>
+<p>業務内容を入力するだけで、A4で見やすい業務報告書を作成できる無料ツールです。入力内容は右側（スマホでは下）のプレビューにリアルタイムで反映されます。</p>
+<h3>使い方</h3><ol><li>テンプレート（一般・営業・飲食店営業・作業完了・日報）を選びます。切り替えると項目名や文例が変わります。</li><li>各項目を入力します。</li><li>「PDFダウンロード」または「印刷」で出力します（入力欄は出力されません）。名前を付けて保存すれば、過去の報告書を後から読み込めます。</li></ol>
+<h3>利用するメリット</h3><p>文書ソフトの書式調整に時間をかけず、内容の記入に集中できます。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">テンプレートを切り替えると入力は消えますか？<span>＋</span></button><div class="faq-a"><p>入力済みの内容は保持されます（空欄または前テンプレートの文例のままの欄には、新しいテンプレートの文例が入ります）。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">保存した報告書はどこにありますか？<span>＋</span></button><div class="faq-a"><p>お使いのブラウザ内に保存されます。外部へ送信されることはありません。</p></div></div></section>
+</section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/vendor/html2canvas.min.js"></script><script src="../../assets/vendor/jspdf.umd.min.js"></script><script src="../../assets/js/pdf.js"></script><script src="../../assets/js/report.js"></script></body></html>

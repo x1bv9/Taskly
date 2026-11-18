@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利益率計算機｜粗利益・利益率の計算と販売価格の逆算｜BizTools</title><meta name="description" content="原価と販売価格から粗利益・利益率・原価率を計算できる無料ツール。目標利益率からの価格逆算、複数商品の比較、グラフ表示、CSV出力に対応。">
+<link rel="canonical" href="https://x1bv9.github.io/BizTools/tools/profit/">
+<meta property="og:type" content="website"><meta property="og:title" content="利益率計算機｜粗利益・利益率の計算と販売価格の逆算｜BizTools"><meta property="og:description" content="原価と販売価格から粗利益・利益率・原価率を計算できる無料ツール。目標利益率からの価格逆算、複数商品の比較、グラフ表示、CSV出力に対応。"><meta property="og:url" content="https://x1bv9.github.io/BizTools/tools/profit/"><meta property="og:site_name" content="BizTools">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- AdSense: 広告コードはこの位置に挿入してください（未設定時は表示されません） -->
+</head><body><header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html">Biz<span>Tools</span></a>
+<nav class="main-nav"><a href="../../index.html">ホーム</a><a href="../../tools/index.html">ツール一覧</a><a href="../../about/index.html">サービスについて</a><a href="../../contact/index.html">お問い合わせ</a></nav></div></header><main class="container"><nav class="breadcrumb"><a href="../../index.html">ホーム</a> ＞ <a href="../../tools/index.html">ツール一覧</a> ＞ 利益率計算機</nav>
+<section class="section"><h1 style="color:var(--text-dark)">利益率計算機</h1>
+<div id="error-box" class="error-box" role="alert"></div>
+<div class="tool-layout">
+<div class="card"><h2>入力</h2>
+<div class="field"><label for="p-name">商品名</label><input type="text" id="p-name" placeholder="例：オリジナルTシャツ"></div>
+<div class="form-grid">
+<div class="field"><label for="p-price">販売価格（1個・円）</label><input type="number" id="p-price" min="0" step="1" placeholder="例：3000"></div>
+<div class="field"><label for="p-cost">原価（1個・円）</label><input type="number" id="p-cost" min="0" step="1" placeholder="例：1500"></div>
+<div class="field"><label for="p-qty">販売数量</label><input type="number" id="p-qty" min="1" step="1" value="1"></div>
+<div class="field"><label for="p-fee-rate">販売手数料率（%・売上に対する割合）</label><input type="number" id="p-fee-rate" min="0" step="0.1" placeholder="例：10"></div>
+<div class="field"><label for="p-other">その他経費（合計・円）</label><input type="number" id="p-other" min="0" step="1" placeholder="例：5000"></div></div>
+<h3>計算式</h3>
+<p style="font-size:14px">売上金額 ＝ 販売価格 × 販売数量<br>総原価 ＝ 原価 × 販売数量<br>手数料 ＝ 売上金額 × 手数料率（切り捨て）<br>総経費 ＝ 手数料 ＋ その他経費<br>粗利益 ＝ 売上金額 − 総原価 − 総経費<br>利益率 ＝ 粗利益 ÷ 売上金額 × 100<br>原価率 ＝ 総原価 ÷ 売上金額 × 100</p>
+<h3>販売価格の逆算</h3>
+<div class="field"><label for="rev-margin">目標利益率（%）</label><input type="number" id="rev-margin" step="0.1" placeholder="例：30"></div>
+<p id="rev-margin-result" style="font-weight:700;color:var(--text-dark)"></p>
+<p style="font-size:13px;color:var(--muted)">計算式：販売価格 ＝（原価 ＋ その他経費÷数量）÷（1 − 手数料率 − 目標利益率）</p>
+<div class="field"><label for="rev-profit">目標利益額（合計・円）</label><input type="number" id="rev-profit" step="1" placeholder="例：100000"></div>
+<p id="rev-profit-result" style="font-weight:700;color:var(--text-dark)"></p>
+<p style="font-size:13px;color:var(--muted)">計算式：販売価格 ＝（目標利益額 ＋ 総原価 ＋ その他経費）÷（数量 ×（1 − 手数料率））</p>
+<div class="toolbar"><button type="button" class="btn" id="btn-reverse">逆算する</button>
+<button type="button" class="btn btn-outline" id="btn-add-compare">比較表に追加</button>
+<button type="button" class="btn btn-outline" id="btn-csv">結果をCSV出力</button>
+<button type="button" class="btn btn-danger" id="btn-reset">リセット</button></div>
+</div>
+<div><div class="card"><h2>計算結果</h2><div class="result-grid">
+<div class="result-item"><div class="k">売上金額</div><div class="v" id="r-sales">0円</div></div>
+<div class="result-item"><div class="k">総原価</div><div class="v" id="r-cost">0円</div></div>
+<div class="result-item"><div class="k">総経費</div><div class="v" id="r-expenses">0円</div></div>
+<div class="result-item"><div class="k">粗利益</div><div class="v" id="r-gross">0円</div></div>
+<div class="result-item"><div class="k">利益率</div><div class="v" id="r-margin">0%</div></div>
+<div class="result-item"><div class="k">原価率</div><div class="v" id="r-costrate">0%</div></div>
+<div class="result-item"><div class="k">1商品あたりの利益</div><div class="v" id="r-perunit">0円</div></div>
+</div>
+<h3>グラフ</h3><canvas id="profit-chart" class="chart" width="640" height="300"></canvas></div></div>
+</div>
+<div class="card" style="margin-top:24px"><h2>複数商品の比較</h2>
+<table><thead><tr><th>商品名</th><th class="num">販売価格</th><th class="num">原価</th><th class="num">数量</th><th class="num">粗利益</th><th class="num">利益率</th><th></th></tr></thead><tbody id="compare-body"></tbody></table>
+<p style="font-size:13px;color:var(--muted)">比較表はブラウザに保存されます。</p></div>
+<section class="content-section"><h2>利益率計算機について</h2>
+<p>商品の原価や販売価格、手数料などから、売上・粗利益・利益率を自動計算する無料ツールです。価格設定の検討や、商品ごとの収益性比較にご利用ください。</p>
+<h3>使い方</h3><ol><li>販売価格・原価・数量・手数料率・その他経費を入力すると、結果が即時に表示されます。</li><li>目標利益率や目標利益額を入力して「逆算する」を押すと、必要な販売価格が分かります。</li><li>「比較表に追加」で複数商品を並べて比較でき、「結果をCSV出力」で表計算ソフトに取り込めます。</li></ol>
+<h3>計算方法</h3><p>計算式は入力欄の下に常時表示しています。手数料は売上に対する割合（%）で計算し、円未満は切り捨てます。</p>
+<h3>利用するメリット</h3><p>電卓や表計算ソフトを開かなくても、価格変更の影響をその場で確認できます。</p>
+<h3>よくある質問</h3>
+<div class="faq-item"><button type="button" class="faq-q">利益率と原価率の違いは？<span>＋</span></button><div class="faq-a"><p>利益率は売上に対する粗利益の割合、原価率は売上に対する原価の割合です。手数料などの経費がない場合、両者の合計は100%になります。</p></div></div>
+<div class="faq-item"><button type="button" class="faq-q">CSVはどんな形式ですか？<span>＋</span></button><div class="faq-a"><p>項目と値の2列のCSVで、Excel等の表計算ソフトで開けます（文字コードはUTF-8、BOM付き）。</p></div></div></section>
+</section></main><footer class="site-footer"><div class="footer-inner">
+<div><strong style="color:#fff">BizTools</strong><br>面倒な事務作業を、ブラウザだけで簡単に。</div>
+<nav><a href="../../privacy/index.html">プライバシーポリシー</a>　<a href="../../terms/index.html">利用規約</a>　<a href="../../contact/index.html">お問い合わせ</a>　<a href="../../about/index.html">サービスについて</a></nav>
+</div><div class="copyright">© <span data-year>2026</span> BizTools</div></footer><div class="toast" role="status"></div><script src="../../assets/js/common.js"></script><script src="../../assets/js/calc.js"></script><script src="../../assets/js/profit.js"></script></body></html>
